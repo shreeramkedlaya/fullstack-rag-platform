@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+html,
+body,
+#root {
+    min-height: 100%;
+}
+
+body {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Global fix for missing Shadcn UI background variables */
+.bg-background,
+.bg-popover,
+.bg-card {
+    background-color: #ffffff;
+}
+
+.bg-muted {
+    background-color: #f1f5f9;
+}

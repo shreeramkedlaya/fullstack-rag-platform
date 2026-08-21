@@ -1,0 +1,18 @@
+# Monorepo Root / IDE / OS Files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*.code-workspace
+
+# Global Environment Variables (if any)
+.env
+.env.*
+
+# Ignore root venv just in case it ever accidentally gets created
+.venv/
+venv/

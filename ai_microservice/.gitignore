@@ -1,0 +1,21 @@
+# Python / FastAPI
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+
+# Data Science / Vector DBs
+chromadb/
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+
+# Environment Variables
+.env
+.env.local
+.env.*

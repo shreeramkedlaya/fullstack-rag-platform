@@ -1,0 +1,25 @@
+Get-ChildItem -Path . -Include __pycache__ -Recurse -Directory | Where-Object { $_.FullName -notmatch '\\\.venv\\' } | Remove-Item -Recurse -Force
+
+# Run migrations sequentially for all databases
+python manage.py migrate --database=default
+python manage.py migrate --database=notesapp_db
+python manage.py migrate --database=task_management_db
+python manage.py migrate --database=customer_orders_db
+
+# Or run them in parallel (if using the custom script)
+# python backend/run_parallel_migrations.py
+
+# ==========================================
+# Terminal 3: Run AI Microservice
+# ==========================================
+# cd ai_microservice
+# uvicorn main:app --port 8001 --reload
+
+# ==========================================
+# AI Microservice Database Migration
+# ==========================================
+# The AI microservice (ai_chat_db) uses SQLAlchemy. 
+# Tables are automatically created on startup via Base.metadata.create_all() in main.py.
+# If you ever need to manually create the tables via script without starting the server, run:
+# cd ai_microservice
+# python -c "from database import Base, engine; Base.metadata.create_all(bind=engine)"
