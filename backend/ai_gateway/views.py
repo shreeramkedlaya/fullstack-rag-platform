@@ -2,6 +2,7 @@ from django.http import JsonResponse, HttpResponse
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 import requests
+import os
 
 FASTAPI_BASE_URL = "http://127.0.0.1:8001"
 
@@ -12,9 +13,10 @@ class AIGatewayProxyView(APIView):
     def proxy_request(self, request, path=""):
         url = f"{FASTAPI_BASE_URL}/chat/{path}"
         
-        # We forward the user's email so FastAPI knows who they are
+        # We forward the user's email and our internal key so FastAPI knows they are trusted
         headers = {
             "X-User-Email": request.user.email,
+            "X-Internal-Auth": os.environ.get("INTERNAL_MICROSERVICE_KEY", "default-dev-key"),
         }
         
         # Forward Content-Type if present, except for multipart/form-data which requests handles automatically

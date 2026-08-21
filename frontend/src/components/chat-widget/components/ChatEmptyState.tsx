@@ -5,7 +5,7 @@ interface ChatEmptyStateProps {
   children: React.ReactNode;
 }
 
-export function ChatEmptyState({ userEmail, children }: ChatEmptyStateProps) {
+const ChatEmptyState = ({ userEmail, children }: ChatEmptyStateProps) => {
   return (
     <div className="flex-1 flex flex-col items-center justify-center p-8 bg-gradient-to-b from-blue-50/50 to-white overflow-hidden relative">
       <div className="z-10 w-full max-w-2xl flex flex-col items-center animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -20,3 +20,5 @@ export function ChatEmptyState({ userEmail, children }: ChatEmptyStateProps) {
     </div>
   );
 }
+
+export default ChatEmptyState;

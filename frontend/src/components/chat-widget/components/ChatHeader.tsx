@@ -6,7 +6,7 @@ interface ChatHeaderProps {
   setIsOpen: (val: boolean) => void;
 }
 
-export function ChatHeader({ isExpanded, setIsExpanded, setIsOpen }: ChatHeaderProps) {
+const ChatHeader = ({ isExpanded, setIsExpanded, setIsOpen }: ChatHeaderProps) => {
   return (
     <div className="bg-gradient-to-r from-blue-600 to-blue-500 p-4 text-white flex justify-between items-center shadow-md z-10">
       <div className="flex items-center gap-2">
@@ -31,3 +31,5 @@ export function ChatHeader({ isExpanded, setIsExpanded, setIsOpen }: ChatHeaderP
     </div>
   );
 }
+
+export default ChatHeader;

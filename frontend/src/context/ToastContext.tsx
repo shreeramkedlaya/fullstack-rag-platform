@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, type ReactNode } from 'react';
 
 type ToastType = 'success' | 'error' | 'info';
 
@@ -14,7 +14,7 @@ interface ToastContextType {
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
-export function ToastProvider({ children }: { children: ReactNode }) {
+const ToastProvider = ({ children }: { children: ReactNode }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
   const showToast = (message: string, type: ToastType = 'info') => {
@@ -32,11 +32,10 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className={`px-4 py-3 rounded-lg shadow-xl text-sm font-medium animate-in slide-in-from-bottom-5 fade-in duration-300 ${
-              toast.type === 'success' ? 'bg-green-600 text-white' :
-              toast.type === 'error' ? 'bg-red-600 text-white' :
-              'bg-gray-800 text-white'
-            }`}
+            className={`px-4 py-3 rounded-lg shadow-xl text-sm font-medium animate-in slide-in-from-bottom-5 fade-in duration-300 ${toast.type === 'success' ? 'bg-green-600 text-white' :
+                toast.type === 'error' ? 'bg-red-600 text-white' :
+                  'bg-gray-800 text-white'
+              }`}
           >
             {toast.message}
           </div>
@@ -46,10 +45,12 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export function useToast() {
+const useToast = () => {
   const context = useContext(ToastContext);
   if (context === undefined) {
     throw new Error('useToast must be used within a ToastProvider');
   }
   return context;
 }
+
+export { ToastProvider, useToast };

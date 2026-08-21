@@ -1,5 +1,5 @@
 import { Check, Edit2, Menu, Plus, Trash2 } from 'lucide-react';
-import { Conversation } from '../types';
+import type { Conversation } from '../types';
 
 interface ChatSidebarProps {
   isSidebarOpen: boolean;
@@ -16,7 +16,7 @@ interface ChatSidebarProps {
   deleteConversation: (e: React.MouseEvent, id: number) => void;
 }
 
-export function ChatSidebar({
+const ChatSidebar = ({
   isSidebarOpen,
   setIsSidebarOpen,
   createNewChat,
@@ -29,7 +29,7 @@ export function ChatSidebar({
   saveEdit,
   startEditing,
   deleteConversation
-}: ChatSidebarProps) {
+}: ChatSidebarProps) => {
   return (
     <div className={`
       ${isSidebarOpen ? 'w-64' : 'w-[72px]'} 
@@ -120,3 +120,5 @@ export function ChatSidebar({
     </div>
   );
 }
+
+export default ChatSidebar;

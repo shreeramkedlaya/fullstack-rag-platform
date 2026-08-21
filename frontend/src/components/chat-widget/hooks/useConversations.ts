@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import axios from '../../../http';
-import { Conversation } from '../types';
+import type { Conversation } from '../types';
 import { useToast } from '../../../context/ToastContext';
 
-export function useConversations() {
+const useConversations = () => {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [conversationId, setConversationId] = useState<number | null>(null);
   const [editingId, setEditingId] = useState<number | null>(null);
@@ -77,3 +77,5 @@ export function useConversations() {
     saveEdit
   };
 }
+
+export { useConversations };

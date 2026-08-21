@@ -4,13 +4,11 @@ import axios from '../http';
 import { Save } from 'lucide-react'
 import { Button } from '../components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '../components/ui/card'
-import { useAuth } from '../context/AuthContext'
 
 type Note = { id: number; title: string; content: string }
 
 export default function Notes() {
   const navigate = useNavigate()
-  const { user } = useAuth()
   const [notes, setNotes] = useState<Note[]>([])
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')

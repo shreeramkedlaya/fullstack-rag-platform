@@ -161,9 +161,9 @@ _DB_BASE = {
 }
 
 _DB_NAMES = [
+    'customer_orders_db',
     'notesapp_db',
     'task_management_db',
-    'customer_orders_db',
 ]
 
 DATABASES = {

@@ -1,14 +1,14 @@
 import { Loader2 } from 'lucide-react';
 import React from 'react';
-import { ChatMessage } from '../types';
+import type { ChatMessage } from '../types';
 
 interface ChatMessagesProps {
   messages: ChatMessage[];
   isLoading: boolean;
-  messagesEndRef: React.RefObject<HTMLDivElement>;
+  messagesEndRef: React.RefObject<HTMLDivElement | null>;
 }
 
-export function ChatMessages({ messages, isLoading, messagesEndRef }: ChatMessagesProps) {
+const ChatMessages = ({ messages, isLoading, messagesEndRef }: ChatMessagesProps) => {
   return (
     <div className="flex-1 p-4 overflow-y-auto bg-gray-50/50 flex flex-col gap-4">
       {messages.map((msg, idx) => (
@@ -17,11 +17,10 @@ export function ChatMessages({ messages, isLoading, messagesEndRef }: ChatMessag
           className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
         >
           <div
-            className={`max-w-[85%] p-3 rounded-2xl text-sm shadow-sm whitespace-pre-wrap break-words ${
-              msg.role === 'user'
+            className={`max-w-[85%] p-3 rounded-2xl text-sm shadow-sm whitespace-pre-wrap break-words ${msg.role === 'user'
                 ? 'bg-blue-600 text-white rounded-tr-sm'
                 : 'bg-gray-100 text-gray-800 rounded-tl-sm'
-            }`}
+              }`}
           >
             {msg.content}
           </div>
@@ -38,3 +37,5 @@ export function ChatMessages({ messages, isLoading, messagesEndRef }: ChatMessag
     </div>
   );
 }
+
+export default ChatMessages;

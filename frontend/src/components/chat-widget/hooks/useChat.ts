@@ -1,19 +1,18 @@
 import { useState, useRef } from 'react';
 import axios from '../../../http';
-import { ChatMessage } from '../types';
+import type { ChatMessage } from '../types';
 import { useToast } from '../../../context/ToastContext';
 
-export function useChat(
-  userEmail: string | undefined,
+const useChat = (
   conversationId: number | null,
   setConversationId: (id: number | null) => void,
   fetchConversations: () => void,
   isExpanded: boolean
-) {
+) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const [stagedFiles, setStagedFiles] = useState<File[]>([]);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -57,7 +56,7 @@ export function useChat(
         setMessages(prev => [...prev, { role: 'user', content: `Uploading ${stagedFiles.length} file(s)...` }]);
         const formData = new FormData();
         stagedFiles.forEach(file => {
-          formData.append('files', file); 
+          formData.append('files', file);
         });
         if (currentConversationId) {
           formData.append('conversation_id', currentConversationId.toString());
@@ -80,7 +79,7 @@ export function useChat(
           role: 'ai',
           content: `Successfully uploaded ${stagedFiles.length} file(s). Created ${data.chunks_created || 0} knowledge chunks.`
         }]);
-        setStagedFiles([]); 
+        setStagedFiles([]);
         showToast("Documents uploaded successfully", "success");
       }
 
@@ -90,21 +89,12 @@ export function useChat(
         setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
         setInputValue('');
 
-        const response = await fetch(`http://localhost:8001/chat/`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-user-email': userEmail || ''
-          },
-          body: JSON.stringify({
-            message: userMessage,
-            conversation_id: currentConversationId
-          }),
-          credentials: 'include'
+        const response = await axios.post(`/chat/`, {
+          message: userMessage,
+          conversation_id: currentConversationId
         });
 
-        if (!response.ok) throw new Error("Network response was not ok");
-        const data = await response.json();
+        const data = response.data;
         setMessages(prev => [...prev, { role: 'ai', content: data.response }]);
 
         if (data.conversation_id && !currentConversationId) {
@@ -138,12 +128,12 @@ export function useChat(
     e.preventDefault();
     setIsDragging(true);
   };
-  
+
   const handleDragLeave = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
   };
-  
+
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
@@ -173,3 +163,5 @@ export function useChat(
     handleDrop
   };
 }
+
+export { useChat };

@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import axios from '../../http';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '../../components/ui/card'
 import { Button } from '../../components/ui/button'
-import { ArrowLeft, Save, ShoppingBag, Banknote, Calendar } from 'lucide-react'
+import { ArrowLeft, Save, ShoppingBag, Calendar } from 'lucide-react'
 
 type Order = {
   id: number
@@ -24,12 +24,9 @@ type Customer = {
   orders: Order[]
 }
 
-import { useAuth } from '../../context/AuthContext'
-
 export default function CustomerDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { user } = useAuth()
 
   const [customer, setCustomer] = useState<Customer | null>(null)
   const [loading, setLoading] = useState(false)

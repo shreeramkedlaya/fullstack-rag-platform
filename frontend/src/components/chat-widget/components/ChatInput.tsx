@@ -6,13 +6,13 @@ interface ChatInputProps {
   setInputValue: (val: string) => void;
   handleSend: () => void;
   isLoading: boolean;
-  fileInputRef: React.RefObject<HTMLInputElement>;
+  fileInputRef: React.RefObject<HTMLInputElement | null>;
   handleFileSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
   hasStagedFiles: boolean;
   isChatState?: boolean;
 }
 
-export function ChatInput({
+const ChatInput = ({
   inputValue,
   setInputValue,
   handleSend,
@@ -21,7 +21,7 @@ export function ChatInput({
   handleFileSelect,
   hasStagedFiles,
   isChatState = false
-}: ChatInputProps) {
+}: ChatInputProps) => {
   if (isChatState) {
     return (
       <div className="flex items-center gap-2 bg-gray-50 rounded-full p-1.5 border border-gray-200 focus-within:border-blue-400 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
@@ -98,3 +98,5 @@ export function ChatInput({
     </div>
   );
 }
+
+export default ChatInput;

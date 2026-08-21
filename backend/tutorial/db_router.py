@@ -70,5 +70,5 @@ class DynamicMetaRouter:
                     f"[Router] Migration check failed for {app_label}.{model_name}: {e}"
                 )
 
-        # Default: only allow core apps on default DB, everything else on default.
-        return db == self.default_db
+        # Default: Prevent any unmapped apps from migrating to prevent accidental pollution of default DB.
+        return False

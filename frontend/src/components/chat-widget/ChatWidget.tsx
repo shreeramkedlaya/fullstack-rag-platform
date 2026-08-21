@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useConversations } from './hooks/useConversations';
 import { useChat } from './hooks/useChat';
-import { ChatSidebar } from './components/ChatSidebar';
-import { ChatHeader } from './components/ChatHeader';
-import { ChatEmptyState } from './components/ChatEmptyState';
-import { ChatMessages } from './components/ChatMessages';
-import { ChatInput } from './components/ChatInput';
-import { StagedFilesTray } from './components/StagedFilesTray';
+import ChatSidebar from './components/ChatSidebar';
+import ChatHeader from './components/ChatHeader';
+import ChatEmptyState from './components/ChatEmptyState';
+import ChatMessages from './components/ChatMessages';
+import ChatInput from './components/ChatInput';
+import StagedFilesTray from './components/StagedFilesTray';
 
 export default function ChatWidget() {
   const { user } = useAuth();
@@ -47,7 +47,7 @@ export default function ChatWidget() {
     handleDragOver,
     handleDragLeave,
     handleDrop
-  } = useChat(user?.email, conversationId, setConversationId, fetchConversations, isExpanded);
+  } = useChat(conversationId, setConversationId, fetchConversations, isExpanded);
 
   // When expanding or opening, try fetching conversations
   useEffect(() => {

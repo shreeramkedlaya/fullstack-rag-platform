@@ -6,7 +6,7 @@ interface StagedFilesTrayProps {
   isChatState?: boolean;
 }
 
-export function StagedFilesTray({ stagedFiles, removeStagedFile, isChatState = false }: StagedFilesTrayProps) {
+const StagedFilesTray = ({ stagedFiles, removeStagedFile, isChatState = false }: StagedFilesTrayProps) => {
   if (stagedFiles.length === 0) return null;
 
   if (isChatState) {
@@ -45,3 +45,5 @@ export function StagedFilesTray({ stagedFiles, removeStagedFile, isChatState = f
     </div>
   );
 }
+
+export default StagedFilesTray;

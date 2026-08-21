@@ -42,7 +42,7 @@ interface DataTableProps<T> {
   extraRowActions?: (row: T) => React.ReactNode;
 }
 
-export function DataTable<T extends Record<string, any>>({ 
+export const DataTable = <T extends Record<string, any>>({ 
   data, 
   columns, 
   onRowClick, 
@@ -60,7 +60,7 @@ export function DataTable<T extends Record<string, any>>({
   onEdit,
   onDelete,
   extraRowActions
-}: DataTableProps<T>) {
+}: DataTableProps<T>) => {
   const [viewMode, setViewMode] = useState<'table' | 'grid'>(defaultView);
   const [userToggled, setUserToggled] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
