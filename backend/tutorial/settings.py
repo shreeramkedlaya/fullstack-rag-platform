@@ -1,8 +1,12 @@
 import os
 import secrets
 from pathlib import Path
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load environment variables from .env file
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 # SECRET_KEY is required by Django. For local development only, auto-generate in DEBUG.
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
@@ -180,4 +184,4 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-GEMINI_API_KEY = "AIzaSyCSr9skk59mbVGKCKKaSvznxdW_C-zGgSU"
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
